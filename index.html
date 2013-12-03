@@ -261,9 +261,31 @@ h1{
 				html += life.renderEvent(d);
 			});
 			life.$el.innerHTML = html;
+			
+			// Fixes bug where mousewheel events aren't triggered once the body is off page
+			document.body.style.width = (nowYear - firstYear) * yearLength + 'px';
 		}
 	}
 
 	life.start();
+	
+	scrollX = function(e) {
+		e = window.event || e;
+		// Only works in Chrome so far
+		if(e.deltaX === 0) {
+			var delta = Math.max(-1, Math.min(1, (e.wheelDelta || -e.detail)));
+			window.scrollBy(delta * 40, 0); // Multiplied by 40
+			e.preventDefault ? e.preventDefault() : e.returnValue = false;
+		}
+	}
+	if (window.addEventListener) {
+		// IE9, Chrome, Safari, Opera
+		window.addEventListener("mousewheel", scrollX, false);
+		// Firefox
+		window.addEventListener("DOMMouseScroll", scrollX, false);
+	} else {
+		// IE 6/7/8
+		window.attachEvent("onmousewheel", scrollX);
+	}
 })();
 </script>
