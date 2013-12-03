@@ -246,7 +246,8 @@ h1{
 
 			var firstYear = life.firstYear = data[0].time.startYear;
 			var nowYear = new Date().getFullYear();
-			var dayLength = life.yearLength/12/30;
+			var yearLength = life.yearLength;
+			var dayLength = yearLength/12/30;
 
 			html = '';
 			var days = 0;
