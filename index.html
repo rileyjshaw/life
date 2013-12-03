@@ -99,7 +99,9 @@ h1{
 </header>
 <div id="life"></div>
 <script>
+console.log('1');
 (function(){
+	console.log('2');
 	var life = {
 		$title: document.getElementById('title'),
 		$el: document.getElementById('life'),
@@ -139,6 +141,7 @@ h1{
 		},
 		fetch: function(fn){
 			var xhr = new XMLHttpRequest();
+			console.log('3');
 			xhr.open('GET', 'life.md', true);
 			xhr.onload = function(){
 				if (xhr.status == 200) fn(xhr.responseText);
@@ -291,5 +294,5 @@ h1{
 		// IE 6/7/8
 		window.attachEvent("onmousewheel", scrollX);
 	}
-});
+})();
 </script>
